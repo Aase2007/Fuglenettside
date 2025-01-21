@@ -1,16 +1,4 @@
 
-// import readXlsxFile from 'read-excel-file'
-
-// let nyheter = document.getElementById('nyheter')
-// let nyhet = document.createElement('p')
-// nyhet.append('hei')
-// nyheter.appendChild(nyhet)
-
-// readXlsxFile('/NNKF142-20241111komplett.xlsx').then((rows) => {
-//     console.log('hei')
-//     // `rows` is an array of rows
-//     // each row being an array of cells.
-//   })
 
 function csvToList(string) {
   list = string.split("\n\r")
@@ -18,7 +6,6 @@ function csvToList(string) {
   return list
 };
 
-// let fuglerliste = 'u\n\rfail'
 async function fetchCSV() {
   try {
       const response = await fetch('/fuglerliste.csv');
@@ -34,11 +21,11 @@ async function fetchCSV() {
 
 
 fetchCSV().then((result) => {
-  fuglerString = result
-  console.log(fuglerString[5])
-  for (let element = 0; element < fuglerString.length; element++ ) {
+  fuglerListe = result
+  console.log(fuglerListe[5])
+  for (let element = 0; element < fuglerListe.length; element++ ) {
     let listeelement = document.createElement('li')
-    listeelement.append(fuglerString[element])
+    listeelement.append(fuglerListe[element])
     document.getElementById('liste').appendChild(listeelement)
   }
   //putte search inni her
@@ -46,19 +33,21 @@ fetchCSV().then((result) => {
 
 
 function search() {
-  console.log('yey', fuglerString[1])
-  var input, filter, li, a, i, txtValue;
+  console.log('yey', fuglerListe[1])
+  var input, filter, li, a, txtValue;
   input = document.getElementById('søk');
   filter = input.value.toUpperCase();
+  ul = document.getElementById("liste");
+  li = ul.getElementsByTagName('li');
 
   console.log(input.value)
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+  for (let i = 0; i < fuglerListe.length; i++) {
+    let a = fuglerListe[i];
+    console.log(a, "a")
+    if (a.toUpperCase().indexOf(filter) > -1) {
       li[i].style.display = "";
     } else {
-      li[i].style.display = "none";
+      li[i].style.display = "none"; 
     }
   }
 }
