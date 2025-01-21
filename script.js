@@ -30,24 +30,12 @@ async function fetchCSV() {
       console.error('Error fetching CSV:', error);
   }
 };
-// var fuglerliste = fetchCSV().then(
-//   console.log(fuglerliste, 2)
-// );
-// fuglerliste.then(console.log(fuglerliste, "2"))
-// fuglerliste.then
 
 
 
 fetchCSV().then((result) => {
   fuglerString = result
   console.log(fuglerString[5])
-  // let liste = document.getElementById('liste')
-  // liste.append(fuglerString)
-  // fuglerString.array.forEach(element => {
-  //   let listeelement = document.createElement('li')
-  //   listeelement.append(element)
-  //   liste.appendChild(listeelement)
-  // });
   for (let element = 0; element < fuglerString.length; element++ ) {
     let listeelement = document.createElement('li')
     listeelement.append(fuglerString[element])
@@ -56,9 +44,6 @@ fetchCSV().then((result) => {
   //putte search inni her
 }).catch(console.error);
 
-//fetchCSV().then(console.log(3, fuglerliste[0]))
-
-// .then(console.log(2));
 
 function search() {
   console.log('yey', fuglerString[1])
