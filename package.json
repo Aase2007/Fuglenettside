@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "mariadb": "^3.4.0",
     "read-excel-file": "^5.8.6"
   }
 }

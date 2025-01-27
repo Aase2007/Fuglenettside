@@ -22,7 +22,8 @@
         <div id="nyheter">
             <div id="lag ny">
                 <div id="søkBoks">
-                    <input id="søk" type="text" onkeyup="search()">
+                    <input id="søk" type="text" onkeyup="search()" oninput="synligListe()">
+                    <button onclick="bekreft()">Bekreft</button>
 
                     <ul id="liste"></ul>
                 </div>
