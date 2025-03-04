@@ -1,4 +1,30 @@
+const API_URL = 'http://localhost:3000/'
+// let cors = require("cors")
+// app.use(cors())
 
+
+async function getObservasjoner() {
+  const res = await fetch(API_URL + "observasjoner");
+  const data = await res.json();
+  for (let i=0; i< data.length; i++){
+    let box = document.createElement('div')
+    let art = document.createElement('h2')
+    let bruker = document.createElement('p')
+    let dato = document.createElement('p')
+    let tekst = document.createElement('p')
+    art.append(data[i].art)
+    bruker.append(data[i].brukernavn)
+    dato.append(data[i].dato)
+    tekst.append(data[i].kommentar)
+    box.appendChild(bruker)
+    box.appendChild(art)
+    box.appendChild(dato)
+    box.appendChild(tekst)
+    document.getElementById('output').appendChild(box)
+  }
+  
+}
+getObservasjoner()
 
 async function fetchCSV() {
   try {
@@ -17,7 +43,7 @@ fetchCSV().then((result) => {
   for (let element = 0; element < fuglerListe.length; element++ ) {
     let listeelement = document.createElement('div')
     listeelement.innerHTML = `<li onclick="clickItem(${element})" role="presentation" class="link"> ${fuglerListe[element]} </li>`
-    document.getElementById('liste').appendChild(listeelement)
+    document.getElementById('autofill').appendChild(listeelement)
   }
 }).catch(console.error);
 
@@ -26,7 +52,7 @@ function search() {
   var input, filter, li;
   input = document.getElementById('søk');
   filter = input.value.toUpperCase();
-  ul = document.getElementById("liste");
+  ul = document.getElementById("autofill");
   li = ul.getElementsByTagName('li');
 
   for (let i = 0; i < fuglerListe.length; i++) {
@@ -40,7 +66,7 @@ function search() {
 }
 
 function synligListe() {
-  document.getElementById('liste').style.display = "inline"
+  document.getElementById('autofill').style.display = "inline"
 }
 
 function clickItem(index) {
@@ -49,5 +75,34 @@ function clickItem(index) {
 }
 
 function bekreft() {
-  document.getElementById('liste').style.display = 'none'
+  document.getElementById('autofill').style.display = 'none'
 }
+
+function sendinn() {
+  let art = document.getElementById("søk").value
+  let sted = document.getElementById('sted').value
+  let dato = document.getElementById('dato').value
+  let kommentar = document.getElementById('kommentar').value
+
+  let observasjonbundle = {
+    "brukernavn": "tester",
+    "art": art,
+    "dato": dato,
+    "sted": sted,
+    "kommentar": kommentar
+  }
+  dato = dato.slice(0, 19).replace('T', ' ');
+  fetch(API_URL + "addobservasjon", {
+    method: "POST",
+    body: JSON.stringify(observasjonbundle),
+    headers: {"Content-type": "application/json; charset=UTF-8"}
+  })
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+  })
+  .catch((error) => console.error("Error:", error));
+  getObservasjoner()
+};

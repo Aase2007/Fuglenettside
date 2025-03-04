@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/xhk0tjg.css">
 </head>
 <body>
     <div id="header">
@@ -14,21 +15,33 @@
         </div>
     </div>
     <div id="main">
-        <div>
-            <ol>
-                <li>havørn</li>
-            </ol>
-        </div>
-        <div id="nyheter">
-            <div id="lag ny">
+        <div id="nyheter" class="main-box">
+            <div id="create">
                 <div id="søkBoks">
-                    <input id="søk" type="text" onkeyup="search()" oninput="synligListe()">
-                    <button onclick="bekreft()">Bekreft</button>
-
-                    <ul id="liste"></ul>
+                    <label for="søk" class="formItem" >Skriv inn observert fugl. OBS! Du må skrive inn det norske navnet på fuglen, hvis du er usikker på det norske navnet kan du søke <a href="https://www.birdlife.no/fuglekunnskap/navn/sok/">her</a></label>
+                    <div class="formItem">
+                        <input id="søk" type="text" onkeyup="search()" oninput="synligListe()">
+                        <button onclick="bekreft()">Bekreft</button>
+                    </div>
+                    <ul id="autofill"></ul>
+                    <label class="formItem" for="sted">Skriv inn observasjonsted</label>
+                    <input class="formItem" id="sted" type="text">
+                    <label class="formItem" for="dato">skriv inn dato</label>
+                    <input class="formItem" id="dato" type="datetime-local">
+                    <label class="formItem" for="kommentar">beskrivelse</label>
+                    <input class="formItem" id="kommentar">
+                    <div class="formItem" id="sendInn">
+                        <button onclick="sendinn()">Send inn</button>
+                    </div>
+                    
                 </div>
             </div>
             <div id="output"></div>
+        </div>
+        <div class="main-box" id="listebox">
+            <ul>
+                <li>havørn</li>
+            </ul>
         </div>
     </div>
     <script src="script.js"></script>

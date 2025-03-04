@@ -1,17 +1,87 @@
 
-#liste {
+body {
+  margin: 0;
+  font-family: "komet", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@media (min-width:0px)  { 
+  /* smartphones, iPhone, portrait 480x320 phones */ 
+  #main {
+    flex-direction: column-reverse;
+  }
+  button{
+    width: 20vw;
+  }
+}
+@media (min-width:961px)  { 
+  /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+  #main {
+    flex-direction: row;
+  }
+  #nyheter{
+    width: 50vw;
+    min-height: 200vh;
+  }
+  #listebox{
+    width: 30vw;
+    height: 70vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+
+  }
+  button{
+    width: 7vw;
+  }
+}
+
+#main {
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+}
+
+.main-box {
+  margin: 10px;
+}
+
+#create{
+  border-style: solid;
+}
+#søkBoks{
+  display: flex;
+  flex-direction: column;
+}
+label {
+  margin-top: 2vh;
+}
+
+#sendInn {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 2vh;
+}
+#søk, #sted, #dato{
+  width:40%;
+}
+.formItem {
+  margin-top: 1vh;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+input, button{
+  font-family: "komet", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#autofill {
     display: none;
     height: 50px;
     overflow-y: hidden;
 }
-
-.link span {
-    color: blue;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  li.link span:hover {
-    color: #00f;
-    text-decoration: underline;
-  }
+#listebox{
+  border-style: solid;
+}
