@@ -6,22 +6,15 @@ const API_URL = 'http://localhost:3000/'
 async function getObservasjoner() {
   const res = await fetch(API_URL + "observasjoner");
   const data = await res.json();
+  let box
   for (let i=0; i< data.length; i++){
-    let box = document.createElement('div')
-    let art = document.createElement('h2')
-    let bruker = document.createElement('p')
-    let dato = document.createElement('p')
-    let tekst = document.createElement('p')
-    art.append(data[i].art)
-    bruker.append(data[i].brukernavn)
-    dato.append(data[i].dato)
-    tekst.append(data[i].kommentar)
-    box.appendChild(bruker)
-    box.appendChild(art)
-    box.appendChild(dato)
-    box.appendChild(tekst)
-    document.getElementById('output').appendChild(box)
+    let art = data[i].art
+    let bruker = data[i].bruker
+    let dato = data[i].dato
+    let beskrivelse = data[i].kommentar
+    box += `<div class="observasjonboks"> <p>${bruker}</p> <h2>${art}</h2> <p>${dato}</p> <p>${beskrivelse}</p> </div>`
   }
+  document.getElementById('output').innerHTML = box
   
 }
 getObservasjoner()
@@ -98,10 +91,17 @@ function sendinn() {
     headers: {"Content-type": "application/json; charset=UTF-8"}
   })
   .then(function (response) {
-    return response.json();
+    return response;
   })
   .then(function (data) {
     console.log(data);
+    if (data) {
+      var allInputs = document.querySelectorAll('input');
+      allInputs.forEach(singleInput => singleInput.value = '');
+    } 
+    else {
+      document.getElementById('søkBoks').innerHTML += '<p>en feil har oppstått, prøv igjen</p>'
+    }
   })
   .catch((error) => console.error("Error:", error));
   getObservasjoner()

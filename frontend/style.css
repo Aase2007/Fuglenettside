@@ -85,3 +85,16 @@ input, button{
 #listebox{
   border-style: solid;
 }
+#kommentar{
+  height: 5vh;
+}
+
+#output {
+  display: flex;
+  flex-direction: column-reverse  ;
+}
+.observasjonboks{
+  border-style: solid;
+  margin-top: 3px;
+  padding: 5px;
+}

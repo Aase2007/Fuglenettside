@@ -24,7 +24,8 @@ app.post("/addobservasjon", async (req, res) => {
         let query = `INSERT INTO observasjoner (brukernavn, art, dato, sted, kommentar) VALUES ('${nyObservasjon.brukernavn}', '${nyObservasjon.art}', '${nyObservasjon.dato}', '${nyObservasjon.sted}', '${nyObservasjon.kommentar}')`
         const dbResponse = await database.query(query)
         console.log("ny observajson lagt til i databasen")
-        res.json(true)
+        let observasjonSendt = true
+        res.json(observasjonSendt)
     } catch (error) {
     console.log(error)
     }
