@@ -8,10 +8,10 @@ async function getObservasjoner() {
   const data = await res.json();
   let box
   for (let i=0; i< data.length; i++){
-    let art = data[i].art
-    let bruker = data[i].bruker
-    let dato = data[i].dato
-    let beskrivelse = data[i].kommentar
+    let art = data[i].species
+    let bruker = data[i].username
+    let dato = data[i].date
+    let beskrivelse = data[i].description
     box += `<div class="observasjonboks"> <p>${bruker}</p> <h2>${art}</h2> <p>${dato}</p> <p>${beskrivelse}</p> </div>`
   }
   document.getElementById('output').innerHTML = box
