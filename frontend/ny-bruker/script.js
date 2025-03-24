@@ -1,8 +1,9 @@
-const API_URL = 'http://localhost:3002/'
+const API_URL = 'http://localhost:3000/'
 let cors = require("cors")
 app.use(cors())
 
 function submit() {
+    let brukernavn = document.getElementById('brukernavn').value
     let brukerepost = document.getElementById('epost').value
     let brukerpassord1 = document.getElementById('passord1').value
     let brukerpassord2 = document.getElementById('passord2').value
@@ -17,7 +18,8 @@ function submit() {
             passordfeil.innerHTML = 'Pass på at passordene er like '
         } else {
             let loginbundle = {
-                'epost': brukerepost,
+                'username': brukernavn,
+                'email': brukerepost,
                 'password': brukerpassord1
             }
             console.log(loginbundle)
@@ -38,10 +40,13 @@ function submit() {
                     window.location.href = "../logg-inn";
                 } else {
                     alert("Bruker opprettet");
-                    window.location.href = "../bruker-side"
+                    window.location.href = "../logg-inn"
                 }
             })
             .catch((error)=> console.error("Error:", error));
         }
     }
+}
+function logginn() {
+    window.location.href = "../logg-inn"
 }

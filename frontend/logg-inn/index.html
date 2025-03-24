@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login System</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../bruker.css">
+    <link rel="stylesheet" href="https://use.typekit.net/xhk0tjg.css">
 </head>
 <body>
     <div id="form">
         <h1>Logg Inn:</h1>
-        <input type="text" id="epost" placeholder="epost">
-        <input type="password" id="passord" placeholder="passord">
+        <label for="epost">E-post:</label>
+        <input type="text" id="epost">
+        <label for="passord">Passord:</label>
+        <input type="password" id="passord">
         <p id="feil"></p>
-        <button onclick="nyBruker()">Ny bruker</button>
-        <button onclick="submit()">Logg Inn</button>
+        <div id="logginn/ny">
+            <button onclick="nyBruker()">Ny bruker</button>
+            <button onclick="submit()">Logg Inn</button>
+        </div>
+
     </div>
     <script src="script.js"></script>
 </body>

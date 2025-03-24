@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3002/'
+const API_URL = 'http://localhost:3000/'
 let cors = require("cors")
 app.use(cors())
 
@@ -7,7 +7,7 @@ function submit() {
     let brukerepost = document.getElementById('epost').value
     let brukerpassord = document.getElementById('passord').value
     let loginbundle = {
-        'epost': brukerepost,
+        'email': brukerepost,
         'password': brukerpassord
     }
     console.log(loginbundle)
@@ -25,6 +25,7 @@ function submit() {
     .then(data => {
         if (data) {
             alert("Innlogging vellykket!");
+            document.cookie = "loggetinn=2";
             window.location.href = "../bruker-side";
         } else {
             feilFelt.innerHTML = "Feil e-post eller passord, prøv igjen!"

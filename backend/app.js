@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const database = require('./dbconnector.js')
+let jwt = require('jsonwebtoken');
 app.use(express.json());
 let cors = require("cors")
 app.use(cors())
@@ -36,13 +37,16 @@ app.post("/login", async (req, res) => {
     try {
         console.log(req.body)
         let users = await database.query(query)
-        const epost = req.body.epost
+        const epost = req.body.email
         const passord = req.body.password
         let loggetInn = false
         for (let i=0; i<users.length; i++) {
-            if (users[i].epost == epost && users[i].password == passord) {
+            if (users[i].email == epost && users[i].password == passord) {
                 console.log('logget inn')
                 loggetInn = true
+                var token = jwt.sign({userid: users[i].userID}, process.env.TOKEN_SECRET,{expiresIn: 120});
+                //res.send(token)
+                console.log(token)
             }
         }
         if (!loggetInn) {
@@ -56,14 +60,14 @@ app.post("/login", async (req, res) => {
 });
 app.post("/nybruker", async (req, res) => {
     let nyUser = req.body;
-    console.log("Ny kunde fra brukeren:", nyUser.epost);
+    console.log("Ny kunde fra brukeren:", nyUser.username);
     try {
         let query = "SELECT * FROM users;";
         let users = await database.query(query)
-        const epost = req.body.epost
+        const epost = req.body.email
         let brukerFinnes = false
         for (let i=0; i<users.length; i++) {
-            if (users[i].epost == epost) {
+            if (users[i].email == email) {
                 console.log('epost finnes allerede')
                 brukerFinnes = true
             }
@@ -71,9 +75,9 @@ app.post("/nybruker", async (req, res) => {
         if (!brukerFinnes) {
             console.log('epost er gyldig')
             try {
-                let query = `INSERT INTO users (epost, password) VALUES ('${nyUser.epost}','${nyUser.password}')`;
+                let query = `INSERT INTO users (username, email, password) VALUES ('${nyUser.username}','${nyUser.email}','${nyUser.password}');`;
                 const dbResponse = await database.query(query);
-                console.log(`Ny bruker lagt til i databasen: ${nyUser.epost} `)
+                console.log(`Ny bruker lagt til i databasen: ${nyUser.username} `)
             } catch (error) {
                 console.log(error);
             };

@@ -72,6 +72,7 @@ function bekreft() {
 }
 
 function sendinn() {
+
   let art = document.getElementById("søk").value
   let sted = document.getElementById('sted').value
   let dato = document.getElementById('dato').value
@@ -106,3 +107,9 @@ function sendinn() {
   .catch((error) => console.error("Error:", error));
   getObservasjoner()
 };
+
+
+let x = document.cookie
+if (x == "loggetinn=2") {
+  console.log('det gikk!')
+}
