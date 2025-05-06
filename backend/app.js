@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const database = require('./dbconnector.js')
+//const fuglerListe = require('./fuglelistelager.js') //trengs bare når du lager fuglerliste
 let jwt = require('jsonwebtoken');
 app.use(express.json());
 let cors = require("cors")
@@ -17,6 +18,16 @@ app.get("/observasjoner", async (req, res) => {
         console.log(error)
     }
 });
+
+app.get("/fugler", async (req, res) => {
+    let query = "SELECT * FROM birds;"
+    try {
+        let birds = await database.query(query)
+        res.send(birds)
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 app.post("/addobservasjon", async (req, res) => {
     let nyObservasjon = req.body;
@@ -67,7 +78,7 @@ app.post("/nybruker", async (req, res) => {
         const epost = req.body.email
         let brukerFinnes = false
         for (let i=0; i<users.length; i++) {
-            if (users[i].email == email) {
+            if (users[i].email == epost) {
                 console.log('epost finnes allerede')
                 brukerFinnes = true
             }
@@ -87,6 +98,8 @@ app.post("/nybruker", async (req, res) => {
         console.log(error)
     }
 });
+
+
 
 app.listen(port, () => {
     console.log(`server running at http://localhost:${port}`);

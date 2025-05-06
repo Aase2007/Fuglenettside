@@ -1,7 +1,7 @@
 const API_URL = 'http://localhost:3000/'
-// let cors = require("cors")
-// app.use(cors())
-
+let cors = require("cors")
+app.use(cors())
+let fuglerListe
 
 async function getObservasjoner() {
   const res = await fetch(API_URL + "observasjoner");
@@ -21,9 +21,10 @@ getObservasjoner()
 
 async function fetchCSV() {
   try {
-      const response = await fetch('/fuglerliste.csv');
+      const response = await fetch('frontend/fuglerliste.csv');
       const data = await response.text();
       const list = await data.split("\r\n")
+      console.log(list)
       return list
   } catch (error) {
       console.error('Error fetching CSV:', error);
