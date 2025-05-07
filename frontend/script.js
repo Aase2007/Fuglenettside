@@ -33,30 +33,7 @@ getFugler().then((result) => {
     document.getElementById('autofill').appendChild(listeelement)
   }
   console.log(fuglerListe)
-}).catch(console.error);
-
-
-// async function fetchCSV() {
-//   try {
-//       const response = await fetch('frontend/fuglerliste.csv');
-//       const data = await response.text();
-//       const list = await data.split("\r\n")
-//       console.log(list)
-//       return list
-//   } catch (error) {
-//       console.error('Error fetching CSV:', error);
-//   }
-// };
-
-// fetchCSV().then((result) => {
-//   fuglerListe = result
-//   fuglerListe.sort((a, b) => a.length - b.length);
-//   for (let element = 0; element < fuglerListe.length; element++ ) {
-//     let listeelement = document.createElement('div')
-//     listeelement.innerHTML = `<li onclick="clickItem(${element})" role="presentation" class="link"> ${fuglerListe[element]} </li>`
-//     document.getElementById('autofill').appendChild(listeelement)
-//   }
-// }).catch(console.error);
+});
 
 
 function search() {
@@ -82,7 +59,7 @@ function synligListe() {
 
 function clickItem(index) {
   document.getElementById('søk').value = fuglerListe[index]
-  search()
+  document.getElementById('autofill').style.display = 'none'
 }
 
 function bekreft() {
