@@ -24,7 +24,7 @@ function submit() {
             }
             console.log(loginbundle)
             console.log(JSON.stringify(loginbundle))
-            fetch(API_URL + "nybruker", {
+            fetch(API_URL + "newuser", {
                 method: "POST",
                 body: JSON.stringify(loginbundle ),
                 headers: {

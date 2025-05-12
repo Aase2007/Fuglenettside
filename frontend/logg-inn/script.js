@@ -26,7 +26,7 @@ function submit() {
         if (data) {
             alert("Innlogging vellykket!");
             document.cookie = "loggetinn=2";
-            window.location.href = "../bruker-side";
+            window.location.href = "../";
         } else {
             feilFelt.innerHTML = "Feil e-post eller passord, prøv igjen!"
             feilFelt.style.display = "block"
