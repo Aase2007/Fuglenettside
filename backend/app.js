@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const database = require('./dbconnector.js')
-//const fuglerListe = require('./fuglelistelager.js') //trengs bare når du lager fuglerliste
+//require('./DBlager.js') //trengs bare når du lager fuglerliste
 let jwt = require('jsonwebtoken');
 app.use(express.json());
 let cors = require("cors")
@@ -15,7 +15,7 @@ app.get("/observasjoner", async (req, res) => {
         let observasjoner = await database.query(query)
         res.send(observasjoner)
     } catch (error) {
-        console.log(error)
+        console.log(error) 
     }
 });
 
