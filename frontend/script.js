@@ -2,7 +2,7 @@ const API_URL = 'http://localhost:3000/'
 let fuglerListe = []
 
 async function getObservasjoner() {
-  const res = await fetch(API_URL + "observasjoner");
+  const res = await fetch(API_URL + "observations");
   const data = await res.json();
   let box
   for (let i=0; i< data.length; i++){
@@ -17,12 +17,12 @@ async function getObservasjoner() {
 }
 getObservasjoner()
 
-async function getFugler() {
-  const res = await fetch(API_URL + "fugler")
+async function getBirds() {
+  const res = await fetch(API_URL + "birds")
   const data = await res.json();
   return data
 }
-getFugler().then((result) => {
+getBirds().then((result) => {
   for(let i=0; i<result.length; i++){
     fuglerListe.push(result[i].nameNO)
   }
@@ -62,9 +62,6 @@ function clickItem(index) {
   document.getElementById('autofill').style.display = 'none'
 }
 
-function bekreft() {
-  document.getElementById('autofill').style.display = 'none'
-}
 
 function sendinn() {
 
@@ -72,16 +69,16 @@ function sendinn() {
   let sted = document.getElementById('sted').value
   let dato = document.getElementById('dato').value
   let kommentar = document.getElementById('kommentar').value
-
+  dato = dato.slice(0, 19).replace('T', ' ');
   let observasjonbundle = {
-    "brukernavn": "tester",
+    "brukernavn": "admin",
     "art": art,
     "dato": dato,
     "sted": sted,
     "kommentar": kommentar
   }
-  dato = dato.slice(0, 19).replace('T', ' ');
-  fetch(API_URL + "addobservasjon", {
+  
+  fetch(API_URL + "addobservation", {
     method: "POST",
     body: JSON.stringify(observasjonbundle),
     headers: {"Content-type": "application/json; charset=UTF-8"}

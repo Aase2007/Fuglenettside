@@ -9,8 +9,8 @@ app.use(express.json());
 let cors = require("cors")
 app.use(cors())
 
-app.get("/observasjoner", async (req, res) => {
-    let query = "SELECT * FROM observasjoner;"
+app.get("/observations", async (req, res) => {
+    let query = "SELECT * FROM observations;"
     try {
         let observasjoner = await database.query(query)
         res.send(observasjoner)
@@ -19,7 +19,7 @@ app.get("/observasjoner", async (req, res) => {
     }
 });
 
-app.get("/fugler", async (req, res) => {
+app.get("/birds", async (req, res) => {
     let query = "SELECT * FROM birds;"
     try {
         let birds = await database.query(query)
@@ -29,11 +29,11 @@ app.get("/fugler", async (req, res) => {
     }
 })
 
-app.post("/addobservasjon", async (req, res) => {
+app.post("/addobservation", async (req, res) => {
     let nyObservasjon = req.body;
     console.log("Ny observasjon fra brukeren:", nyObservasjon.brukernavn)
     try {
-        let query = `INSERT INTO observasjoner (username, species, date, place, description) VALUES ('${nyObservasjon.brukernavn}', '${nyObservasjon.art}', '${nyObservasjon.dato}', '${nyObservasjon.sted}', '${nyObservasjon.kommentar}')`
+        let query = `INSERT INTO observations (username, species, date, place, description) VALUES ('${nyObservasjon.brukernavn}', '${nyObservasjon.art}', '${nyObservasjon.dato}', '${nyObservasjon.sted}', '${nyObservasjon.kommentar}')`
         const dbResponse = await database.query(query)
         console.log("ny observajson lagt til i databasen")
         let observasjonSendt = true
@@ -69,7 +69,7 @@ app.post("/login", async (req, res) => {
         console.log(error)
     }
 });
-app.post("/nybruker", async (req, res) => {
+app.post("/newuser", async (req, res) => {
     let nyUser = req.body;
     console.log("Ny kunde fra brukeren:", nyUser.username);
     try {
