@@ -23,13 +23,15 @@ function submit() {
         return response.json();
     })
     .then(data => {
-        if (data) {
-            alert("Innlogging vellykket!");
-            document.cookie = "loggetinn=2";
-            window.location.href = "../";
-        } else {
+        console.log(data.token)
+        if (!data) {
             feilFelt.innerHTML = "Feil e-post eller passord, prøv igjen!"
             feilFelt.style.display = "block"
+        } else {
+            alert("Innlogging vellykket!");
+            document.cookie = `token = ${data.token}; path=../frontend`;
+            console.log(document.cookie)
+            window.location.href = "../";
         }
     })
     .catch((error)=> console.error("Error:", error));

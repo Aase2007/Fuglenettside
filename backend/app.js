@@ -55,15 +55,16 @@ app.post("/login", async (req, res) => {
             if (users[i].email == epost && users[i].password == passord) {
                 console.log('logget inn')
                 loggetInn = true
-                var token = jwt.sign({userid: users[i].userID}, process.env.TOKEN_SECRET,{expiresIn: 120});
-                //res.send(token)
+                let token = jwt.sign({userid: users[i].username}, process.env.TOKEN_SECRET,{expiresIn: 120});
                 console.log(token)
+                res.send({'token': token})
             }
         }
         if (!loggetInn) {
             console.log('epost eller passord er feil')
+            res.send(loggetInn)
         }
-        res.json(loggetInn)
+        
       
     } catch (error) {
         console.log(error)

@@ -48,12 +48,8 @@ sendQuery(createObservations)
 let createUsers = "CREATE OR REPLACE TABLE users(username VARCHAR(255) NOT NULL PRIMARY KEY, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL);"
 sendQuery(createUsers)
 
-
-
 let createReference1 = "ALTER TABLE observations ADD FOREIGN KEY (species) REFERENCES birds(nameNO);"
 sendQuery(createReference1)
 let createReference2 = "ALTER TABLE observations ADD FOREIGN KEY (username) REFERENCES users(username);"
 sendQuery(createReference2)
 
-
-//FOREIGN KEY ('userID') references 'users'(userID)

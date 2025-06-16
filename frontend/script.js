@@ -91,6 +91,7 @@ function sendinn() {
     if (data) {
       var allInputs = document.querySelectorAll('input');
       allInputs.forEach(singleInput => singleInput.value = '');
+      location.reload();
     } 
     else {
       document.getElementById('søkBoks').innerHTML += '<p>en feil har oppstått, prøv igjen</p>'
@@ -101,7 +102,10 @@ function sendinn() {
 };
 
 
+
+// if (document.cookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJ0ZXN0ZXIiLCJpYXQiOjE3NDcxMjE2NTgsImV4cCI6MTc0NzEyMTc3OH0.O0BU-pOJhbe7q1o3aYFO0ROPhwa7O6-lU5lFj8g_k2g"){
+//     console.log('logget inn!')
+// }
+
 let x = document.cookie
-if (x == "loggetinn=2") {
-  console.log('det gikk!')
-}
+console.log(x)
